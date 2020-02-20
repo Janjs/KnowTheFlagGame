@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <img src='@/assets/logo-django.png' style="width: 250px" />
+    <!--<img src='@/assets/logo-django.png' style="width: 250px" />
     <p>The data below is added/removed from the SQLite Database using Django's ORM and Rest Framework.</p>
     <br/>
     <p>Subject</p>
@@ -22,7 +22,7 @@
         <p class="msg-subject" v-html="msg.subject"></p>
         <p class="msg-body" v-html="msg.body"></p>
         <input type="submit" @click="deleteMessage(msg.pk)" value="Delete" />
-    </div>
+    </div> -->
   </div>
 </template>
 

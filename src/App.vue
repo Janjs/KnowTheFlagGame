@@ -1,28 +1,64 @@
 <template>
   <div id="app">
-    <h1>Django VueJs Template</h1>
-    <div id="nav">
-     <router-link :to="{ name: 'home' }">Vue</router-link> |
-     <router-link :to="{ name: 'messages' }">Django Rest</router-link>
-    </div>
-    <router-view/>
+    <div class="routing">
+          <div class="inside-routing">
+                <h1>Know the country flag game</h1>
+
+                  <router-link :to="{ name: 'game' }">
+                    <b-button id="bbutton">Start Game</b-button>
+                  </router-link>
+                  <br />
+                  <router-link :to="{ name: 'messages' }">
+                    <b-button id="bbutton">Leaderboard</b-button>
+                  </router-link>
+                </div>
+                </div>  
+        <div class="main">
+          <router-view/>
+      </div>
   </div>
 </template>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 body {
- background-image: url("./assets/flagbackground.gif");
- background-color: #2c3e50;
- background-repeat: no-repeat;
- background-size: cover;
- background-position: center;
+  background-image: url("./assets/flagbackground.gif");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+}
+.main {
+  height: 100%;
+  width: 80%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+}
+.routing {
+  height: 100%;
+  width: 20%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.091);
+  overflow-x: hidden;
+  padding-top: 20px;
+  display: flex;
+  align-items: center;
+}
+#bbutton {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 10px 10px;
+  margin: 10px 10px;
 }
 </style>
