@@ -3940,6 +3940,13 @@ json-stringify-safe@~5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/json-stringify-safe/-/json-stringify-safe-5.0.1.tgz#1296a2d58fd45f19a0f6ce01d65701e2c735b6eb"
 
+json2mq@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/json2mq/-/json2mq-0.2.0.tgz#b637bd3ba9eabe122c83e9720483aeb10d2c904a"
+  integrity sha1-tje9O6nqvhIsg+lyBIOusQ0skEo=
+  dependencies:
+    string-convert "^0.2.0"
+
 json3@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/json3/-/json3-3.3.2.tgz#3c0434743df93e2f5c42aee7b19bcb483575f4e1"
@@ -5681,6 +5688,11 @@ resolve@^1.3.2:
   dependencies:
     path-parse "^1.0.5"
 
+responsive@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/responsive/-/responsive-2.0.0.tgz#8acc69f928e5fa73b716ea08bb6ee46d5cc7a33e"
+  integrity sha512-pFpYb/RBAMJ43BR1T2/hnkRcOq5Iib4hIDvPrYIqdMm9BmZ2RAHLzQrirFTxpO2ndGcAAuheJoI+ZYRpfN2v3Q==
+
 restore-cursor@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/restore-cursor/-/restore-cursor-2.0.0.tgz#9f7ee287f82fd326d4fd162923d62129eee0dfaf"
@@ -6114,6 +6126,11 @@ stream-http@^2.7.2:
 stream-shift@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/stream-shift/-/stream-shift-1.0.0.tgz#d5c752825e5367e786f78e18e445ea223a155952"
+
+string-convert@^0.2.0:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/string-convert/-/string-convert-0.2.1.tgz#6982cc3049fbb4cd85f8b24568b9d9bf39eeff97"
+  integrity sha1-aYLMMEn7tM2F+LJFaLnZvznu/5c=
 
 string-width@^1.0.1:
   version "1.0.2"
@@ -6639,10 +6656,22 @@ vue-loader@^15.3.0:
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
 
+vue-mq@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/vue-mq/-/vue-mq-1.0.1.tgz#ee7dec5a0f50b4e2edbacd8ed43c57e15a072989"
+  integrity sha512-FceZ1tFE0MZ8GroRBKPQWBRy4ZEAa7p5R7cGAzJpGuKPU2AI4ClmE+S6O/yV4jO5271o9tgaUFt7fzUAIf9xOQ==
+  dependencies:
+    json2mq "^0.2.0"
+
 vue-rate-it@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/vue-rate-it/-/vue-rate-it-2.1.0.tgz#4c016aa56a5e2fa3a0e87e2fcd3d8280fea1404e"
   integrity sha1-TAFqpWpeL6Og6H4vzT2CgP6hQE4=
+
+vue-responsive@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/vue-responsive/-/vue-responsive-1.1.0.tgz#7d5c82038feb8399076f90e9a20ac98473f7ec78"
+  integrity sha512-gZR7PihB6ExohvyrIFwJcJDG3qvbdrdMB6aZAm14jWNIUxUacN6ZQLbQbmQduW+tlR3vVHAPdvwFvU57D1my4g==
 
 vue-router@^3.0.1:
   version "3.0.1"
