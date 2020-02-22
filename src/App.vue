@@ -30,14 +30,13 @@ export default {
 
 <style>
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
+  font-family: "Luminari", fantasy;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: hsl(0, 0%, 100%);
 }
 body {
-  background-image: url("./assets/flagbackground.gif");
+  background-image: url("./assets/flagbackground.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
@@ -73,7 +72,7 @@ body {
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.091);
+  background-color: rgba(0, 0, 0, 0.2);
   overflow-x: hidden;
   padding-top: 20px;
   display: flex;
