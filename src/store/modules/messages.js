@@ -263,7 +263,7 @@ const getters = {
     return state.messages
   },
   countries: state => {
-    return state.messages
+    return state.countries
   }
 }
 
