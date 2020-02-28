@@ -27,7 +27,7 @@
     <div class="container">
       <div class="flagContainer">
         <img
-          :src="imgSrc"
+          :src="getImgUrl(code)"
           alt="flag"
           id="border"
           v-bind:class="[this.wrongAnswer ? 'shakeImg' : null]"
@@ -72,23 +72,29 @@ export default {
       wrongAnswer: false,
       name: "",
       nameState: null,
-      imgSrc2:
-        "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
-      imgSrc: require("@/assets/flags-big/es.png")
+      imgSrc: require("@/assets/flags-big/es.png"),
+      flagNumber: null
     };
   },
   created() {
-    this.code = this.countries[22].code.toLowerCase();
-    //this.imgSrc = "require(@/assets/flags-big/"+this.code+".png)";
+    this.flagNumber = this.randomNumber();
+    this.response = this.countries[this.flagNumber].name;
+    this.code = this.countries[this.flagNumber].code.toLowerCase();
+    this.imgSrc = require("@/assets/flags-big/"+this.code+".png");
+    this.getImgUrl(code);
   },
   computed: mapState({
     countries: state => state.messages.countries
   }),
   methods: {
     answerTodo(answer) {
-      if (this.answer.toUpperCase() === "spain".toUpperCase()) {
+      if (this.answer.toUpperCase() === this.countries[this.flagNumber].name.toUpperCase()) {
         this.correctAnswers += 1;
-        this.response = this.answer + " is correct";
+        this.answer = "";
+        this.flagNumber = this.randomNumber();
+        this.response = this.countries[this.flagNumber].name;
+        this.code = this.countries[this.flagNumber].code.toLowerCase();
+        this.imgSrc = this.getImgUrl(code);
       } else {
         if (this.lifes === 0) {
           this.noLifesLeft();
@@ -101,6 +107,13 @@ export default {
           self.wrongAnswer = false;
         }, 1000);
       }
+    },
+    getImgUrl(pet) {
+      var images = require.context('@/assets/flags-big/', false, /\.png$/)
+      return images('./' + pet + ".png")
+    },
+    randomNumber : function(){
+      return Math.floor(Math.random() * (197 - 0 + 1)) + 0;
     },
     noLifesLeft() {
       this.showModal();
