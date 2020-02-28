@@ -1,12 +1,37 @@
 <template>
-  <div>
+  <div style="overflow-y: auto;">
     <div class="userInfoContainer">
-      <div style="margin: 5px 0px"> Tries left: {{ lifes }} </div>
-      <div style="margin: 5px 0px"> Nº correct countries: {{ correctAnswers }} </div>
+      <div style="margin: 5px 0px">Tries left: {{ lifes }}</div>
+      <div style="margin: 5px 0px">Nº correct countries: {{ correctAnswers }}</div>
+      <b-modal
+        id="modal-prevent-closing"
+        ref="modal"
+        title="Save your results on the leaderboard"
+        centered
+        @show="resetModal"
+        @hidden="resetModal"
+        @ok="handleOk"
+      >
+        <form ref="form" @submit.stop.prevent="handleSubmit">
+          <b-form-group
+            :state="nameState"
+            label="Name"
+            label-for="name-input"
+            invalid-feedback="Name is required"
+          >
+            <b-form-input id="name-input" v-model="name" :state="nameState" required></b-form-input>
+          </b-form-group>
+        </form>
+      </b-modal>
     </div>
     <div class="container">
       <div class="flagContainer">
-        <img src="@/assets/flags-big/bb.png" alt="flag" id="border" />
+        <img
+          :src="imgSrc"
+          alt="flag"
+          id="border"
+          v-bind:class="[this.wrongAnswer ? 'shakeImg' : null]"
+        />
       </div>
       <form @submit="answerTodo" v-on:answer-todo="answerTodo">
         <br />
@@ -33,7 +58,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from "vuex";
 
 export default {
   name: "game",
@@ -43,38 +68,80 @@ export default {
       response: "",
       correctAnswers: 0,
       lifes: 5,
-      code: ""
+      code: "",
+      wrongAnswer: false,
+      name: "",
+      nameState: null,
+      imgSrc2:
+        "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png",
+      imgSrc: require("@/assets/flags-big/es.png")
     };
   },
-  created(){
-    this.code = this.countries[0].code.toLowerCase();
+  created() {
+    this.code = this.countries[22].code.toLowerCase();
+    //this.imgSrc = "require(@/assets/flags-big/"+this.code+".png)";
   },
   computed: mapState({
     countries: state => state.messages.countries
   }),
   methods: {
     answerTodo(answer) {
-      if(this.answer.toUpperCase() === "spain".toUpperCase()){
-        this.makeToast('success');
+      if (this.answer.toUpperCase() === "spain".toUpperCase()) {
+        this.correctAnswers += 1;
         this.response = this.answer + " is correct";
       } else {
-        this.makeToast('danger')
+        if (this.lifes === 0) {
+          this.noLifesLeft();
+        }
+        this.lifes -= 1;
+        this.wrongAnswer = true;
         this.response = this.answer + " is wrong";
+        var self = this;
+        setTimeout(function() {
+          self.wrongAnswer = false;
+        }, 1000);
       }
-      /*this.response =
-        this.answer.toUpperCase() === "spain".toUpperCase()
-          ? this.answer + " is correct"
-          : this.answer + " is wrong";*/
     },
-    makeToast(variant = null) {
-        this.$bvToast.toast('Toast body content', {
-          title: `Variant ${variant || 'default'}`,
-          toaster: 'b-toaster-top-right',
-          variant: variant,
-          solid: true,
-          autoHideDelay: 1000
-        })
+    noLifesLeft() {
+      this.showModal();
+    },
+    setAnswerNullAgain() {
+      this.wrongAnswer = false;
+    },
+    showModal() {
+      this.$refs["modal"].show();
+    },
+    checkFormValidity() {
+      const valid = this.$refs.form.checkValidity();
+      this.nameState = valid;
+      return valid;
+    },
+    resetModal() {
+      this.answer = "";
+      this.response = "";
+      this.correctAnswers = 0;
+      this.lifes = 5;
+      this.code = "";
+      this.wrongAnswer = false;
+      this.name = "";
+      this.nameState = null;
+    },
+    handleOk(bvModalEvt) {
+      // Prevent modal from closing
+      bvModalEvt.preventDefault();
+      // Trigger submit handler
+      this.handleSubmit();
+    },
+    handleSubmit() {
+      // Exit when the form isn't valid
+      if (!this.checkFormValidity()) {
+        return;
       }
+      // Hide the modal manually
+      this.$nextTick(() => {
+        this.$bvModal.hide("modal-prevent-closing");
+      });
+    }
   }
 };
 </script>
@@ -108,6 +175,7 @@ export default {
   text-align: left;
   max-height: 100%;
   max-width: 100%;
+  margin-bottom: 3%;
   overflow-y: auto;
 }
 .userInfoContainer {
@@ -136,7 +204,37 @@ export default {
 .flagContainer img {
   max-height: 100%;
   max-width: 60%;
-  width: 80%;
+  width: 50%;
   object-fit: cover;
+}
+
+.shakeImg {
+  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
 }
 </style>
