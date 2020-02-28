@@ -30,7 +30,7 @@ export default {
 
 <style>
 #app {
-  font-family: "Luminari", fantasy;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: hsl(0, 0%, 100%);
