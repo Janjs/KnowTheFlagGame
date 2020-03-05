@@ -1,16 +1,16 @@
 import api from '@/services/api'
 
 export default {
-  fetchMessages() {
-    return api.get(`messages/`)
+  fetchPlayers() {
+    return api.get(`players/`)
               .then(response => response.data)
   },
-  postMessage(payload) {
-    return api.post(`messages/`, payload)
+  postPlayer(payload) {
+    return api.post(`players/`, payload)
               .then(response => response.data)
   },
-  deleteMessage(msgId) {
-    return api.delete(`messages/${msgId}`)
+  deletePlayer(playerId) {
+    return api.delete(`players/${playerId}`)
               .then(response => response.data)
   }
 }

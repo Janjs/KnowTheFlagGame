@@ -7,7 +7,7 @@
                     <b-button id="bbutton">Start Game</b-button>
                   </router-link>
                   <br />
-                  <router-link :to="{ name: 'messages' }">
+                  <router-link :to="{ name: 'leaderboard' }">
                     <b-button id="bbutton">Leaderboard</b-button>
                   </router-link>
                 </div>

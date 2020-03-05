@@ -2,12 +2,12 @@ from django.db import models
 from rest_framework import serializers
 
 
-class Message(models.Model):
-    subject = models.CharField(max_length=200)
-    body = models.TextField()
+class Player(models.Model):
+    name = models.CharField(max_length=200)
+    score = models.IntegerField()
 
 
-class MessageSerializer(serializers.HyperlinkedModelSerializer):
+class PlayerSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Message
-        fields = ('url', 'subject', 'body', 'pk')
+        model = Player
+        fields = ('url', 'name', 'score', 'pk')

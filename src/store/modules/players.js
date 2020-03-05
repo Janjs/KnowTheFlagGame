@@ -1,7 +1,7 @@
-import messageService from '../../services/messageService'
+import playersService from '../../services/playersService'
 
 const state = {
-  messages: [],
+  players: [],
   countries: [
     {code: 'AF', name: 'Afghanistan'},
     {code: 'AL', name: 'Albania'},
@@ -205,8 +205,8 @@ const state = {
 }
 
 const getters = {
-  messages: state => {
-    return state.messages
+  players: state => {
+    return state.players
   },
   countries: state => {
     return state.countries
@@ -214,33 +214,33 @@ const getters = {
 }
 
 const actions = {
-  getMessages ({ commit }) {
-    messageService.fetchMessages()
-    .then(messages => {
-      commit('setMessages', messages)
+  getPlayers ({ commit }) {
+    playersService.fetchPlayers()
+    .then(players => {
+      commit('setPlayers', players)
     })
   },
-  addMessage({ commit }, message) {
-    messageService.postMessage(message)
+  addPlayer({ commit }, player) {
+    playersService.postPlayer(player)
     .then(() => {
-      commit('addMessage', message)
+      commit('addPlayer', player)
     })
   },
-  deleteMessage( { commit }, msgId) {
-    messageService.deleteMessage(msgId)
-    commit('deleteMessage', msgId)
+  deletePlayer( { commit }, playerId) {
+    playersService.deletePlayer(playerId)
+    commit('deletePlayer', playerId)
   }, 
 }
 
 const mutations = {
-  setMessages (state, messages) {
-    state.messages = messages
+  setPlayers (state, players) {
+    state.players = players
   },
-  addMessage(state, message) {
-    state.messages.push(message)
+  addPlayer(state, player) {
+    state.players.push(player)
   },
-  deleteMessage(state, msgId) {
-    state.messages = state.messages.filter(obj => obj.pk !== msgId)
+  deletePlayer(state, playerId) {
+    state.players = state.players.filter(obj => obj.pk !== playerId)
   },
   setCountries (state, countries) {
     state.countries = countries

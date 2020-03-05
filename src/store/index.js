@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import messages from './modules/messages'
+import players from './modules/players'
 import VueMq from 'vue-mq'
  
 Vue.use(VueMq, {
@@ -16,6 +16,6 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
-    messages
+    players
   }
 })

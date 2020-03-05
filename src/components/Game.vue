@@ -3,6 +3,14 @@
     <div class="userInfoContainer">
       <div style="margin: 5px 0px">Tries left: {{ lifes }}</div>
       <div style="margin: 5px 0px">Nº correct countries: {{ correctAnswers }}</div>
+      <div style="margin: 5px 0px">
+        <b-button
+            type="submit"
+            @click="getHint"
+            id="bbutton"
+            class="btn btn-info btn-lg btn-block"
+          >{{ hints }} Hints</b-button>
+      </div>
       <b-modal
         id="modal-prevent-closing"
         ref="modal"
@@ -58,7 +66,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   name: "game",
@@ -67,13 +75,14 @@ export default {
       answer: "",
       response: "",
       correctAnswers: 0,
+      hints: 3,
       lifes: 5,
       code: "",
       wrongAnswer: false,
-      name: "",
       nameState: null,
       imgSrc: require("@/assets/flags-big/es.png"),
-      flagNumber: null
+      flagNumber: null,
+      name: "",
     };
   },
   created() {
@@ -84,8 +93,11 @@ export default {
     this.getImgUrl(code);
   },
   computed: mapState({
-    countries: state => state.messages.countries
+    countries: state => state.players.countries
   }),
+  methods: mapActions('players', [
+    'addPlayer',
+  ]),
   methods: {
     answerTodo(answer) {
       if (this.answer.toUpperCase() === this.countries[this.flagNumber].name.toUpperCase()) {
@@ -101,12 +113,17 @@ export default {
         }
         this.lifes -= 1;
         this.wrongAnswer = true;
-        this.response = this.answer + " is wrong";
         var self = this;
         setTimeout(function() {
           self.wrongAnswer = false;
         }, 1000);
       }
+    },
+    getHint(){
+      if(this.hints>=1){
+        this.hints -= 1;
+        this.answer = this.response;
+      } 
     },
     getImgUrl(pet) {
       var images = require.context('@/assets/flags-big/', false, /\.png$/)
@@ -150,11 +167,12 @@ export default {
       if (!this.checkFormValidity()) {
         return;
       }
+      this.$store.dispatch('players/addPlayer', { name: this.name, score: this.correctAnswers })
       // Hide the modal manually
       this.$nextTick(() => {
         this.$bvModal.hide("modal-prevent-closing");
       });
-    }
+    },
   }
 };
 </script>
