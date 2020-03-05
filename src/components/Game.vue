@@ -41,7 +41,7 @@
           v-bind:class="[this.wrongAnswer ? 'shakeImg' : null]"
         />
       </div>
-      <form @submit="answerTodo" v-on:answer-todo="answerTodo">
+      <form>
         <br />
         <div id="answerContainer">
           <h3 style="margin-right: 2%;">Name the country:</h3>
@@ -54,7 +54,7 @@
         <div id="buttonContainer">
           <b-button
             type="submit"
-            @click="$emit('answer-todo', answer)"
+            @click="answerTodo"
             id="bbutton"
             style="width: 80%;"
             class="btn btn-success btn-lg btn-block"

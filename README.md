@@ -35,8 +35,8 @@ Before getting started you should have the following installed and running:
 ## Setup Template
 
 ```
-$ git clone https://github.com/gtalarico/django-vue-template
-$ cd django-vue-template
+$ git clone https://github.com/Janjs/KnowTheFlagGame
+$ cd KnowTheFlagGame
 ```
 
 Setup
