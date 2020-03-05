@@ -41,7 +41,7 @@
           v-bind:class="[this.wrongAnswer ? 'shakeImg' : null]"
         />
       </div>
-      <form>
+      <form v-on:submit.prevent="answerTodo">
         <br />
         <div id="answerContainer">
           <h3 style="margin-right: 2%;">Name the country:</h3>
@@ -53,7 +53,6 @@
         </p>-->
         <div id="buttonContainer">
           <b-button
-            type="submit"
             @click="answerTodo"
             id="bbutton"
             style="width: 80%;"
