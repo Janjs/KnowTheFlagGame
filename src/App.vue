@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div v-bind:class="[isSmallScreen() ? 'mobileRouting' : 'routing']">
-          <div class="inside-routing">
+          <div v-bind:class="[isSmallScreen() ? 'insideRoutingMobile' : 'insideRouting']">
                 <h1>Know the country flag game</h1>
                   <router-link :to="{ name: 'game' }">
                     <b-button id="bbutton">Start Game</b-button>
@@ -51,9 +51,21 @@ body {
   right: 0;
   display: flex;
 }
-.inside-routing{
+.insideRouting{
    max-height: 100%;
   max-width: 100%;
+}
+.insideRoutingMobile{
+   max-height: 100%;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  font-size: small;
+}
+.insideRoutingMobile h1{
+  font-size: medium;
 }
 .mainMobile {
   height: 80%;

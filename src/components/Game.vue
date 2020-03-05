@@ -8,6 +8,7 @@
             type="submit"
             @click="getHint"
             id="bbutton"
+            style="padding: 5px 11px; margin: 5px 5px"
             class="btn btn-info btn-lg btn-block"
           >{{ hints }} Hints</b-button>
       </div>
@@ -16,7 +17,6 @@
         ref="modal"
         title="Save your results on the leaderboard"
         centered
-        @show="resetModal"
         @hidden="resetModal"
         @ok="handleOk"
       >
@@ -56,7 +56,7 @@
             type="submit"
             @click="$emit('answer-todo', answer)"
             id="bbutton"
-            style="width: 80%"
+            style="width: 80%;"
             class="btn btn-success btn-lg btn-block"
           >Answer</b-button>
         </div>
@@ -154,7 +154,12 @@ export default {
       this.code = "";
       this.wrongAnswer = false;
       this.name = "";
+      this.hints = 3;
       this.nameState = null;
+      this.flagNumber = this.randomNumber();
+      this.response = this.countries[this.flagNumber].name;
+      this.code = this.countries[this.flagNumber].code.toLowerCase();
+      this.imgSrc = this.getImgUrl(code);
     },
     handleOk(bvModalEvt) {
       // Prevent modal from closing
@@ -168,6 +173,7 @@ export default {
         return;
       }
       this.$store.dispatch('players/addPlayer', { name: this.name, score: this.correctAnswers })
+      this.resetModal();
       // Hide the modal manually
       this.$nextTick(() => {
         this.$bvModal.hide("modal-prevent-closing");

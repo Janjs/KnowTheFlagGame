@@ -1,26 +1,18 @@
 <template>
-  <div style="overflow-y: auto;">
-    <p>The data below is added/removed from the SQLite Database using Django's ORM and Rest Framework.</p>
-    <br/>
-    <p>Subject</p>
-    <input type="text" placeholder="Hello" v-model="name">
-    <p>Leaderboard</p>
-    <input type="number" v-model="score">
-    <br><br>
-    <input 
-      type="submit" 
-      value="Add" 
-      @click="addPlayer({ name: name, score: score })" 
-      :disabled="!name || !score">
-
-    <hr/>
-    <h3>Loaderboard on Database</h3>
+  <div style="overflow-y: auto; width: 100%">
+    <div class="title">
+      <h3>Loaderboard</h3>
+    </div> 
     <p v-if="players.length === 0">Noone Played</p>
+    <div class="msg">
+        <p class="msg-index">Position</p>
+        <p class="msg-index">Name</p>
+        <p class="msg-index">Score</p>
+    </div> 
     <div class="msg" v-for="(player, index) in players" :key="index">
-        <p class="msg-index">[{{index}}]</p>
+        <p class="msg-index">{{index+1}}.</p>
         <p class="msg-subject" v-html="player.name"></p>
         <p class="msg-body" v-html="player.score"></p>
-        <input type="submit" @click="deleteMessage(player.pk)" value="Delete" />
     </div> 
   </div>
 </template>
@@ -37,7 +29,9 @@ export default {
     };
   },
   computed: mapState({
-    players: state => state.players.players
+    players: state => state.players.players.sort(function(a, b) {
+      return b.score - a.score;
+    })
   }),
   methods: mapActions('players', [
     'addPlayer',
@@ -55,7 +49,7 @@ hr {
   max-width: 65%;
 }
 
-.userInfoContainer {
+.title {
   top: 0;
   right: 0;
   width: 100%;
@@ -68,23 +62,20 @@ hr {
 }
 
 .msg {
-  margin: 0 auto;
-  max-width: 30%;
-  text-align: left;
-  border-bottom: 1px solid #ccc;
-  padding: 1rem;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  vertical-align: middle;
+  margin: auto;
 }
 
 .msg-index {
-  color: #ccc;
-  font-size: 0.8rem;
+  font-size: 1.3rem;
   /* margin-bottom: 0; */
-}
-
-img {
-  width: 250px;
-  padding-top: 50px;
-  padding-bottom: 50px;
 }
 
 </style>
