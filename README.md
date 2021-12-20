@@ -1,6 +1,6 @@
 # Know the country flag game!!
 
-You think you know about geography? lets test it! this Vue JS app with a Django backend challenges you to say of with country is the flag that shows up, you got 5 tries, with 3 hints.
+You think you know about geography? lets test it! this Vue JS app with a Django backend challenges you to say of with country is the flag that shows up, you got 5 tries, with 3 hints (The hints just tell you the solution).
 
 Check the leaderboard to see who gets the highest score!!
 
